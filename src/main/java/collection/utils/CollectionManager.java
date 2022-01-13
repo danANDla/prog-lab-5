@@ -84,7 +84,7 @@ public class CollectionManager {
                     return true;
                 }
                 catch (InvalidIdException e){
-                    return false; // todo messgae invalid id
+                    return false;
                 }
             }
             case "CREATION_DATE":{
@@ -95,7 +95,7 @@ public class CollectionManager {
                     return true;
                 }
                 catch (InvalidIdException e){
-                    return false; // todo messgae invalid id
+                    return false;
                 }
             }
             case "PARTICIPANTS_NUM":{
@@ -106,7 +106,7 @@ public class CollectionManager {
                     return true;
                 }
                 catch (InvalidIdException e){
-                    return false; // todo messgae invalid id
+                    return false;
                 }
             }
             case "ALBUMS_COUNT":{
@@ -117,7 +117,7 @@ public class CollectionManager {
                     return true;
                 }
                 catch (InvalidIdException e){
-                    return false; // todo messgae invalid id
+                    return false;
                 }
             }
             case "DESCRIPTION":{
@@ -128,7 +128,7 @@ public class CollectionManager {
                     return true;
                 }
                 catch (InvalidIdException e){
-                    return false; // todo messgae invalid id
+                    return false;
                 }
 
             }
@@ -140,7 +140,7 @@ public class CollectionManager {
                     return true;
                 }
                 catch (InvalidIdException e){
-                    return false; // todo messgae invalid id
+                    return false;
                 }
 
             }
@@ -152,12 +152,12 @@ public class CollectionManager {
                     return true;
                 }
                 catch (InvalidIdException e){
-                    return false; // todo messgae invalid id
+                    return false;
                 }
 
             }
             default:{
-                return false; // todo message invalid field
+                return false;
             }
         }
     }
