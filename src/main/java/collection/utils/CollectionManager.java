@@ -12,6 +12,7 @@ import java.util.LinkedHashSet;
 public class CollectionManager {
     private Integer bandId = 0;
     private LinkedHashSet<MusicBand> bandsList;
+    private MusicBandFactory bandFactory;
 
     public void insertBand(MusicBand newBand){
         bandId+=1;
@@ -50,6 +51,19 @@ public class CollectionManager {
         }
         if(!found) throw new InvalidIdException();
         return null;
+    }
+
+    public boolean updateBand(Integer idUpdate){
+        try{
+            MusicBand oldBand = getBandById(idUpdate);
+            MusicBand updatedBand = bandFactory.makeBand();
+            updatedBand.setId(idUpdate);
+            oldBand = updatedBand;
+            return true;
+        }
+        catch (InvalidIdException e){
+            return false;
+        }
     }
 
     public boolean updateBandField(Integer idUpdate, String field){

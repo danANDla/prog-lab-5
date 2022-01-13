@@ -2,9 +2,6 @@ package collection.utils;
 
 import collection.music.MusicBand;
 
-
-
-
 public class MusicBandFactory {
     public MusicBand makeBand(){
         return new MusicBand(
