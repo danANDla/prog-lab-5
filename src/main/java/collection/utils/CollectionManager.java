@@ -37,4 +37,16 @@ public class CollectionManager {
         }
         return badId;
     }
+
+    public boolean removeBand(Integer idRemove){
+        boolean found = false;
+        for(MusicBand band: bandsList){
+            if(idRemove == band.getId()){
+                found = true;
+                bandsList.remove(band);
+                bandId = idRemove;
+            }
+        }
+        return found;
+    }
 }
