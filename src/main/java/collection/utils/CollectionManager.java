@@ -9,8 +9,6 @@ import exceptions.InvalidIdException;
 import java.util.Date;
 import java.util.LinkedHashSet;
 
-import static java.lang.Math.min;
-
 public class CollectionManager {
     private Integer bandId = 0;
     private LinkedHashSet<MusicBand> bandsList;
@@ -54,16 +52,16 @@ public class CollectionManager {
         return null;
     }
 
-    public boolean updateBand(Integer idUpdate, String field){
+    public boolean updateBandField(Integer idUpdate, String field){
         field = field.toUpperCase();
-        try {
-            MusicBand foundBand = getBandById(idUpdate);
-            String newName = asker.askName();
-            if(foundBand!=null) foundBand.setName(newName);
-        }
-        catch (InvalidIdException e){
-            return false;
-        }
+//        try {
+//            MusicBand foundBand = getBandById(idUpdate);
+//            String newName = asker.askName();
+//            if(foundBand!=null) foundBand.setName(newName);
+//        }
+//        catch (InvalidIdException e){
+//            return false;
+//        }
         switch (field){
             case "NAME":{ // todo check for askers
                 try {
@@ -169,8 +167,46 @@ public class CollectionManager {
                 found = true;
                 bandsList.remove(band);
                 bandId = idRemove;
+                return found;
             }
         }
         return found;
+    }
+
+    public void clearList(){
+        bandsList.clear();
+    }
+
+    public void saveToXML(){
+        // TODO XML save
+    }
+
+    public void removeGreater(){
+        // todo removeGreater
+    }
+
+    public void removeLower(){
+        // todo removeLower
+    }
+
+    public int albumsCount(){
+        int albumCounter = 0;
+        for(MusicBand band: bandsList){
+            albumCounter += band.getAlbumsCount();
+        }
+        return albumCounter;
+    }
+
+    public void removeByAlbumsCount(int albumNumber){
+        for(MusicBand band: bandsList){
+            if(band.getAlbumsCount() == albumNumber){
+                bandId = band.getId();
+                bandsList.remove(band);
+            }
+        }
+    }
+
+    public void groupByDescription(){
+       // todo groupByDescription
     }
 }
