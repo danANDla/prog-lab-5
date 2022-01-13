@@ -13,7 +13,6 @@ public class MusicBandFactory {
 
     public MusicBand makeBand(){
         return new MusicBand(
-                getId(),
                 askName(),
                 askCoordinates(),
                 askDate(),

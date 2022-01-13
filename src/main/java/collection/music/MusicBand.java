@@ -13,8 +13,7 @@ public class MusicBand {
     private MusicGenre genre; //Поле не может быть null
     private Album bestAlbum; //Поле не может быть null
 
-    public MusicBand(Integer id, String name, Coordinates coordinates, Date creationDate, long numberOfParticipants, int albumsCount, String description, MusicGenre genre, Album bestAlbum) {
-        this.id = id;
+    public MusicBand(String name, Coordinates coordinates, Date creationDate, long numberOfParticipants, int albumsCount, String description, MusicGenre genre, Album bestAlbum) {
         this.name = name;
         this.coordinates = coordinates;
         this.creationDate = creationDate;
