@@ -6,12 +6,15 @@ import collection.music.MusicGenre;
 import services.IOutil;
 
 import java.util.Date;
-import java.util.Locale;
 
-public class asker {
-    static IOutil io;
+public class Asker {
+    private final IOutil io;
 
-    private static String getNonEmpty(){
+    public Asker(IOutil ioutil){
+        io = ioutil;
+    }
+
+    private String getNonEmpty(){
        String str;
        str = io.readLine().trim();
        while(str.equals("")){
@@ -21,7 +24,7 @@ public class asker {
        return str;
     }
 
-    private static void printGenres(){
+    private void printGenres(){
         io.printText("список жанров:");
         io.printText("  (1) Progressive rock");
         io.printText("  (2) Jazz");
@@ -30,7 +33,7 @@ public class asker {
         io.printText("  (5) Math rock");
     }
 
-    public static String askName(){
+    public String askName(){
         io.printText("Введите название группы");
         String bandName;
         bandName = io.readLine().trim();
@@ -41,7 +44,7 @@ public class asker {
         return bandName;
     }
 
-    public static Coordinates askCoordinates(){
+    public Coordinates askCoordinates(){
         boolean xvalid = false;
         boolean yvalid = false;
         double x = 0;
@@ -71,7 +74,7 @@ public class asker {
         return bandCoordinates;
     }
 
-    public static Date askDate(){
+    public Date askDate(){
         boolean dayvalid = false;
         boolean monthvalid = false;
         boolean yearvalid = false;
@@ -113,7 +116,7 @@ public class asker {
         return creationDate;
     }
 
-    public static long askParticipants(){
+    public long askParticipants(){
         long participantsNumber = 0;
         boolean valid = false;
         io.printText("Введите количество участников");
@@ -132,7 +135,7 @@ public class asker {
         return participantsNumber;
     }
 
-    public static int askAlbums(){
+    public int askAlbums(){
         int albumsNumber = 0;
         boolean valid = false;
         io.printText("Введите количество записанных альбомов");
@@ -151,14 +154,14 @@ public class asker {
         return albumsNumber;
     }
 
-    public static String askDescription(){
+    public String askDescription(){
         String bandDescription = "";
         io.printText("Введите описание");
         bandDescription = getNonEmpty();
         return bandDescription;
     }
 
-    public static MusicGenre askGenre(){
+    public MusicGenre askGenre(){
         boolean valid = false;
         int intGenre = -1;
         MusicGenre bandGenre = null;
@@ -218,16 +221,16 @@ public class asker {
         return bandGenre;
     }
 
-    public static Album askBest(){
+    public Album askBest(){
         io.printText("Введите данные о лучшем альбоме");
         return new Album(askAlbumName(), askTracksNumber(), askAlbumLength(), askAlbumSales());
     }
-    private static String askAlbumName(){
+    private String askAlbumName(){
         io.printText("название альбома");
         String albumName = getNonEmpty();
         return albumName;
     }
-    private static int askTracksNumber(){
+    private int askTracksNumber(){
         io.printText("количество треков в альбоме");
         int tracksNumber = -1;
         boolean valid = false;
@@ -245,7 +248,7 @@ public class asker {
         }
         return tracksNumber;
     }
-    private static Integer askAlbumLength(){
+    private Integer askAlbumLength(){
         io.printText("продолжительность альбома");
         String str;
         int albumLength = -1;
@@ -266,7 +269,7 @@ public class asker {
         }
         return albumLength;
     }
-    private static double askAlbumSales(){
+    private double askAlbumSales(){
         io.printText("продажи альбома (вещественное число)");
         String str;
         double albumSales = -1;

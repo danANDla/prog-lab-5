@@ -5,6 +5,7 @@ import collection.music.Coordinates;
 import collection.music.MusicBand;
 import collection.music.MusicGenre;
 import exceptions.InvalidIdException;
+import services.IOutil;
 
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -12,9 +13,17 @@ import java.util.LinkedHashSet;
 public class CollectionManager {
     private Integer bandId = 0;
     private LinkedHashSet<MusicBand> bandsList;
-    private MusicBandFactory bandFactory;
+    private final MusicBandFactory bandFactory;
+    private Asker asker;
 
-    public void insertBand(MusicBand newBand){
+    public CollectionManager(IOutil io){
+        asker = new Asker(io);
+        bandFactory = new MusicBandFactory(asker);
+        bandsList = new LinkedHashSet<MusicBand>();
+    }
+
+    public void insertBand(){
+        MusicBand newBand = bandFactory.makeBand();
         bandId+=1;
         if(idTaken(bandId) || (bandId > bandsList.size()*2)){
             bandId = findNewId(bandId);
@@ -221,6 +230,6 @@ public class CollectionManager {
     }
 
     public void groupByDescription(){
-       // todo groupByDescription
+        // todo groupByDescription
     }
 }

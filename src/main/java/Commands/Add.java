@@ -4,12 +4,15 @@ import collection.utils.CollectionManager;
 import collection.utils.MusicBandFactory;
 
 public class Add implements Command{
-    private MusicBandFactory bandFactory;
     private CollectionManager collecManager;
+
+    public Add(CollectionManager collMan){
+        collecManager = collMan;
+    }
 
     @Override
     public void execute() {
-        collecManager.insertBand(bandFactory.makeBand());
+        collecManager.insertBand();
     }
 
     @Override
