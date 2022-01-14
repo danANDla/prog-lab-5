@@ -68,6 +68,10 @@ public class CollectionManager {
     }
 
     public boolean updateBand(Integer idUpdate){
+        if(bandsList.isEmpty()){
+            io.printError("Коллекция пуста");
+            return false;
+        }
         try{
             MusicBand oldBand = getBandById(idUpdate);
             MusicBand updatedBand = bandFactory.makeBand();
