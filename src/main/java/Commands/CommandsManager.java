@@ -24,6 +24,7 @@ public class CommandsManager {
         commandsList.put("exit", new Exit(io));
         commandsList.put("help", new Help(commandsList, io));
         commandsList.put("info", new Info(collectionManager));
+        commandsList.put("show", new Show(collectionManager));
     }
 
     public void executeCommand(String command){

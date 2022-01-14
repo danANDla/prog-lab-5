@@ -3,7 +3,7 @@ package services;
 import java.util.Scanner;
 
 public class IOutil {
-    private boolean errsInOut = false;
+    private boolean errsInOut = true;
     private final Scanner scanner;
 
     public IOutil(){
@@ -25,7 +25,7 @@ public class IOutil {
     }
     public void printError(String text){
         if(errsInOut) System.out.println("\u001B[31m" + "Error: " + text + "\u001B[0m");
-        System.err.println(text);
+        else System.err.println(text);
     }
     public String readLine(){
         return scanner.nextLine();

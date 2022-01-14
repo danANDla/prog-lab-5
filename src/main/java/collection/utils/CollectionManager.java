@@ -247,4 +247,16 @@ public class CollectionManager {
             io.printText("количество элементов в коллекции: " + bandsList.size());
         }
     }
+
+    public void show(){
+
+        if(bandsList.isEmpty()){
+            io.printError("Коллекция пуста");
+        }
+        else{
+            for(MusicBand band: bandsList){
+                io.printText(band.toString());
+            }
+        }
+    }
 }

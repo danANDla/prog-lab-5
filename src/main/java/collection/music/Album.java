@@ -46,4 +46,14 @@ public class Album {
     public void setSales(double sales) {
         this.sales = sales;
     }
+
+    @Override
+    public String toString() {
+        return "Album{" +
+                "name='" + name + '\'' +
+                ", tracks=" + tracks +
+                ", length=" + length +
+                ", sales=" + sales +
+                '}';
+    }
 }
