@@ -1,7 +1,6 @@
-package Commands;
+package commands;
 
 import collection.utils.CollectionManager;
-import collection.utils.MusicBandFactory;
 import services.IOutil;
 
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 package application;
 
-import Commands.CommandsManager;
+import commands.CommandsManager;
 import services.IOutil;
 
 public class CollectionApplication {

@@ -1,9 +1,6 @@
-package Commands;
+package commands;
 
 import services.IOutil;
-
-import java.nio.charset.StandardCharsets;
-import java.util.Locale;
 
 public class Exit implements Command {
     IOutil io;

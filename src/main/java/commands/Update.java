@@ -1,4 +1,4 @@
-package Commands;
+package commands;
 
 import collection.utils.CollectionManager;
 import services.IOutil;
