@@ -21,6 +21,7 @@ public class CommandsManager {
     public void fillList(){
         commandsList = new HashMap<String, Command>();
         commandsList.put("ADD", new Add(collectionManager));
+        commandsList.put("EXIT", new Exit(io));
     }
 
     public void executeCommand(String command){

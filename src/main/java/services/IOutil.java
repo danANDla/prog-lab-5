@@ -17,6 +17,9 @@ public class IOutil {
     public void printText(String text){
         System.out.println(text);
     }
+    public void printWarning(String text){
+        System.out.println( "\u001B[33m" + text + "\u001B[0m");
+    }
     public void printError(String text){
         if(errsInOut) System.out.println("\u001B[31m" + "Error: " + text + "\u001B[0m");
         System.err.println(text);
