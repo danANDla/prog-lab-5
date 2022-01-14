@@ -20,12 +20,13 @@ public class CommandsManager {
 
     public void fillList(){
         commandsList = new HashMap<String, Command>();
-        commandsList.put("ADD", new Add(collectionManager));
-        commandsList.put("EXIT", new Exit(io));
+        commandsList.put("add", new Add(collectionManager));
+        commandsList.put("exit", new Exit(io));
+        commandsList.put("help", new Help(commandsList, io));
     }
 
     public void executeCommand(String command){
-        command = command.trim().toUpperCase(Locale.ROOT);
+        command = command.trim().toLowerCase(Locale.ROOT);
         if(commandsList.containsKey(command)){
             Command newCommand = commandsList.get(command);
             newCommand.execute();

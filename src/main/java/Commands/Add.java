@@ -17,6 +17,7 @@ public class Add implements Command{
 
     @Override
     public String getdescription() {
-        return null; // todo description
+        String descr = "добавить новый элемент в коллекцию";
+        return descr;
     }
 }
