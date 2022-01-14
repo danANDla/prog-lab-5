@@ -29,6 +29,7 @@ public class CommandsManager {
         commandsList.put("show", new Show(collectionManager));
         argumentedComandsList.put("update", new Update(collectionManager, io));
         argumentedComandsList.put("remove_by_id", new RemoveById(collectionManager,io));
+        commandsList.put("clear", new Clear(collectionManager));
     }
 
     public void executeCommand(String newCommand){
