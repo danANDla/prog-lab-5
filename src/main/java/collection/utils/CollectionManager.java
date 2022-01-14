@@ -193,6 +193,10 @@ public class CollectionManager {
     }
 
     public boolean removeBand(Integer idRemove){
+        if(bandsList.isEmpty()){
+            io.printError("Коллекция пуста");
+            return false;
+        }
         boolean found = false;
         for(MusicBand band: bandsList){
             if(idRemove == band.getId()){
