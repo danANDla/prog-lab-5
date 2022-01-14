@@ -7,6 +7,7 @@ import collection.music.MusicGenre;
 import exceptions.InvalidIdException;
 import services.IOutil;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedHashSet;
 
@@ -15,11 +16,15 @@ public class CollectionManager {
     private LinkedHashSet<MusicBand> bandsList;
     private final MusicBandFactory bandFactory;
     private Asker asker;
+    private IOutil io;
+    private LocalDate creationDate;
 
-    public CollectionManager(IOutil io){
+    public CollectionManager(IOutil ioutil){
+        io = ioutil;
         asker = new Asker(io);
         bandFactory = new MusicBandFactory(asker);
         bandsList = new LinkedHashSet<MusicBand>();
+        creationDate = LocalDate.now();
     }
 
     public void insertBand(){
@@ -231,5 +236,15 @@ public class CollectionManager {
 
     public void groupByDescription(){
         // todo groupByDescription
+    }
+
+    public void info(){
+        if(bandsList.isEmpty()){
+            io.printError("Коллекция пуста");
+        }
+        else{
+            io.printText("дата инициализации коллекции: " + creationDate);
+            io.printText("количество элементов в коллекции: " + bandsList.size());
+        }
     }
 }

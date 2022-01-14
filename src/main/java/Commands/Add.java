@@ -1,7 +1,6 @@
 package Commands;
 
 import collection.utils.CollectionManager;
-import collection.utils.MusicBandFactory;
 
 public class Add implements Command{
     private CollectionManager collecManager;
