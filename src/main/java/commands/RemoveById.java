@@ -1,7 +1,7 @@
 package commands;
 
 import collection.utils.CollectionManager;
-import services.IOutil;
+import utils.IOutil;
 
 public class RemoveById implements ArgumentedCommand{
     private CollectionManager collectionManager;

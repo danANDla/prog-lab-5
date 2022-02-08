@@ -1,7 +1,14 @@
 package collection.music;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 import java.util.Date;
 
+@XmlRootElement(name = "band")
+@XmlType(propOrder = {"id", "name", "coordinates", "creationDate", "numberOfParticipants", "albumsCount", "description",
+        "genre", "bestAlbum"})
 public class MusicBand {
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -24,10 +31,15 @@ public class MusicBand {
         this.bestAlbum = bestAlbum;
     }
 
+    public MusicBand(){
+
+    }
+
     public Integer getId() {
         return id;
     }
 
+    @XmlAttribute
     public void setId(Integer id) {
         this.id = id;
     }
@@ -36,6 +48,7 @@ public class MusicBand {
         return name;
     }
 
+    @XmlElement
     public void setName(String name) {
         this.name = name;
     }
@@ -44,6 +57,7 @@ public class MusicBand {
         return coordinates;
     }
 
+    @XmlElement
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
@@ -52,6 +66,7 @@ public class MusicBand {
         return creationDate;
     }
 
+    @XmlElement
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
@@ -60,6 +75,7 @@ public class MusicBand {
         return numberOfParticipants;
     }
 
+    @XmlElement
     public void setNumberOfParticipants(long numberOfParticipants) {
         this.numberOfParticipants = numberOfParticipants;
     }
@@ -68,6 +84,7 @@ public class MusicBand {
         return albumsCount;
     }
 
+    @XmlElement
     public void setAlbumsCount(int albumsCount) {
         this.albumsCount = albumsCount;
     }
@@ -76,6 +93,7 @@ public class MusicBand {
         return description;
     }
 
+    @XmlElement
     public void setDescription(String description) {
         this.description = description;
     }
@@ -84,6 +102,7 @@ public class MusicBand {
         return genre;
     }
 
+    @XmlElement
     public void setGenre(MusicGenre genre) {
         this.genre = genre;
     }
@@ -92,6 +111,7 @@ public class MusicBand {
         return bestAlbum;
     }
 
+    @XmlElement
     public void setBestAlbum(Album bestAlbum) {
         this.bestAlbum = bestAlbum;
     }

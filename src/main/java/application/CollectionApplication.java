@@ -1,18 +1,22 @@
 package application;
 
+import collection.utils.CollectionManager;
 import commands.CommandsManager;
-import services.IOutil;
+import utils.IOutil;
 
 public class CollectionApplication {
     private IOutil io;
-    private CommandsManager executor;
+    private CommandsManager commandsManager;
+    private CollectionManager collectionManager;
 
     public CollectionApplication(){
         io = new IOutil();
-        executor = new CommandsManager(io);
+        collectionManager = new CollectionManager(io);
+        commandsManager =  new CommandsManager(io, collectionManager);
     }
 
     public void start(){
+        collectionManager.readXML();
         executeCommands();
     }
 
@@ -20,7 +24,7 @@ public class CollectionApplication {
         while(true){
             System.out.print("> ");
             String newCommand = io.readLine();
-            executor.executeCommand(newCommand);
+            commandsManager.executeCommand(newCommand);
         }
     }
 }

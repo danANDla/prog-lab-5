@@ -5,19 +5,24 @@ import collection.music.Coordinates;
 import collection.music.MusicBand;
 import collection.music.MusicGenre;
 import exceptions.InvalidIdException;
-import services.IOutil;
+import utils.IOutil;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedHashSet;
 
+@XmlRootElement(name = "bandsList")
 public class CollectionManager {
     private Integer bandId = 0;
     private LinkedHashSet<MusicBand> bandsList;
-    private final MusicBandFactory bandFactory;
+    private MusicBandFactory bandFactory;
     private Asker asker;
     private IOutil io;
     private LocalDate creationDate;
+    private FIleManager fIleManager;
 
     public CollectionManager(IOutil ioutil){
         io = ioutil;
@@ -25,6 +30,25 @@ public class CollectionManager {
         bandFactory = new MusicBandFactory(asker);
         bandsList = new LinkedHashSet<MusicBand>();
         creationDate = LocalDate.now();
+        fIleManager = new FIleManager(io, this);
+    }
+
+    public CollectionManager(){
+        io = new IOutil();
+        asker = new Asker(io);
+        bandFactory = new MusicBandFactory(asker);
+        bandsList = new LinkedHashSet<MusicBand>();
+        creationDate = LocalDate.now();
+        fIleManager = new FIleManager(io, this);
+    }
+
+    @XmlElement(name = "band")
+    public void setBandsList(LinkedHashSet<MusicBand> bandsList) {
+        this.bandsList = bandsList;
+    }
+
+    public void readXML(){
+        fIleManager.fromXML();
     }
 
     public void insertBand(){
@@ -37,6 +61,14 @@ public class CollectionManager {
         bandsList.add(newBand);
     }
 
+    public void insertBand(MusicBand newBand){
+        if(idTakenTwice(newBand.getId()) || (newBand.getId() > bandsList.size()*20)){
+            bandId = findNewId(bandId);
+            newBand.setId(bandId);
+        }
+        bandsList.add(newBand);
+    }
+
     public LinkedHashSet<MusicBand> getBandsList() {
         return bandsList;
     }
@@ -44,6 +76,15 @@ public class CollectionManager {
     private boolean idTaken(Integer checkId){
         for(MusicBand band: bandsList){
             if(band.getId() == checkId) return true;
+        }
+        return false;
+    }
+
+    private boolean idTakenTwice(Integer checkId){
+        int k = 0;
+        for(MusicBand band: bandsList){
+            if(band.getId() == checkId) k+=1;
+            if(k >= 2) return true;
         }
         return false;
     }
@@ -82,6 +123,82 @@ public class CollectionManager {
         catch (InvalidIdException e){
             return false;
         }
+    }
+
+    public boolean validate(MusicBand band){
+        System.out.println(band);
+        boolean res = true;
+        if(band.getId() == null){
+           io.printWarning("Id элемента не задан и будет сгенерирован автоматически");
+        }
+        else if(band.getId() < 0){
+            io.printWarning("Введенный Id меньше нуля, правильный Id будет сгенерирован автоматически");
+        }
+        else if(idTakenTwice(band.getId())){
+            io.printWarning("Введенный Id уже занят, правильный Id будет сгенерирован автоматически");
+        }
+
+        if (band.getName().equals("")){
+            io.printError("Название группы не может быть пустой строкой");
+            res = false;
+        }
+
+        if(band.getCoordinates().getX() == null){
+            io.printError("Координата X не может быть null");
+            res = false;
+        }
+        if(band.getCoordinates().getY() == null){
+            io.printError("Координата Y не может быть null");
+            res = false;
+        }
+        else if(band.getCoordinates().getY() <=-620){
+            io.printError("Координата Y не может быть меньше -620");
+            res = false;
+        }
+
+        if(band.getCreationDate() == null){
+            io.printError("creationDate не может быть null");
+            res = false;
+        }
+
+        if(band.getNumberOfParticipants() <= 0){
+            io.printError("Количество участников не может быть меньше 0");
+            res = false;
+        }
+
+        if(band.getAlbumsCount() <= 0){
+            io.printError("Количество альбомов не может быть меньше 0");
+            res = false;
+        }
+
+        if(band.getGenre() == null){
+            io.printError("genre не может быть null");
+            res = false;
+        }
+
+        if(band.getBestAlbum() == null){
+            io.printError("bestAlbum не может быть null");
+            res = false;
+        }
+        else{
+            if(band.getBestAlbum().getName().equals("")){
+                io.printError("Название альбома не может быть пустой строкой");
+                res = false;
+            }
+            if(band.getBestAlbum().getTracks()<= 0){
+                io.printError("Количество треков в альбоме не может быть меньше 0");
+                res = false;
+            }
+            if(band.getBestAlbum().getLength()<= 0){
+                io.printError("Продолжительность альбома не может быть меньше 0");
+                res = false;
+            }
+            if(band.getBestAlbum().getSales()<= 0){
+                io.printError("Продажи альбома не могут быть меньше 0");
+                res = false;
+            }
+        }
+        return res;
     }
 
     public boolean updateBandField(Integer idUpdate, String field){

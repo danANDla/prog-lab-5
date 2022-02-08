@@ -1,5 +1,9 @@
 package collection.music;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "coordinates")
 public class Coordinates {
     private Double x; //Поле не может быть null
     private Integer y; //Значение поля должно быть больше -620, Поле не может быть null
@@ -10,6 +14,7 @@ public class Coordinates {
         return x;
     }
 
+    @XmlElement(name = "coordinateX")
     public void setX(Double x) {
         this.x = x;
     }
@@ -18,6 +23,7 @@ public class Coordinates {
         return y;
     }
 
+    @XmlElement(name = "coordinateY")
     public void setY(Integer y) {
         this.y = y;
     }

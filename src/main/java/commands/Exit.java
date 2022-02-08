@@ -1,6 +1,6 @@
 package commands;
 
-import services.IOutil;
+import utils.IOutil;
 
 public class Exit implements Command {
     IOutil io;
